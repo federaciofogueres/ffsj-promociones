@@ -1,10 +1,12 @@
-import { HttpResponse, HttpEvent, HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Configuration } from '../../external-api/configuration';
-import { ResponseToken } from '../../external-api/responseToken';
-import { Usuario } from '../../external-api/usuario';
 import { ResponseAsociaciones } from '../../external-api/responseAsociaciones';
+import { ResponseStatus } from '../../external-api/responseStatus';
+import { ResponseToken } from '../../external-api/responseToken';
+import { Sorteo } from '../../external-api/sorteo';
+import { Usuario } from '../../external-api/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -51,8 +53,6 @@ export class CensoService {
     }
 
     // to determine the Content-Type header
-    const consumes: string[] = [
-    ];
 
     return this.httpClient.request<ResponseAsociaciones>('get',`${this.basePath}/asociaciones`,
         {
@@ -101,6 +101,53 @@ export class CensoService {
           reportProgress: reportProgress
       }
     );
+  }
+
+  /**
+     * Guardar el formulario de sorteo
+     * 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+  public sorteosPost(body: Sorteo, observe?: 'body', reportProgress?: boolean): Observable<ResponseStatus>;
+  public sorteosPost(body: Sorteo, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseStatus>>;
+  public sorteosPost(body: Sorteo, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseStatus>>;
+  public sorteosPost(body: Sorteo, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+      if (body === null || body === undefined) {
+          throw new Error('Required parameter body was null or undefined when calling sorteosPost.');
+      }
+
+      let headers = this.defaultHeaders;
+
+      // to determine the Accept header
+      let httpHeaderAccepts: string[] = [
+          'application/json'
+      ];
+      const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+      if (httpHeaderAcceptSelected != undefined) {
+          headers = headers.set('Accept', httpHeaderAcceptSelected);
+      }
+
+      // to determine the Content-Type header
+      const consumes: string[] = [
+          'application/json'
+      ];
+      const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+      if (httpContentTypeSelected != undefined) {
+          headers = headers.set('Content-Type', httpContentTypeSelected);
+      }
+
+      return this.httpClient.request<ResponseStatus>('post',`${this.basePath}/sorteos`,
+          {
+              body: body,
+              withCredentials: this.configuration.withCredentials,
+              headers: headers,
+              observe: observe,
+              reportProgress: reportProgress
+          }
+      );
   }
     
 }

@@ -2,7 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { Sorteo } from '../../../external-api/sorteo';
+import { CensoService } from '../../services/censo.service';
 import { FooterComponent } from '../footer/footer.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-sorteo',
@@ -12,7 +15,8 @@ import { FooterComponent } from '../footer/footer.component';
     ReactiveFormsModule,
     CommonModule,
     NgxExtendedPdfViewerModule,
-    FooterComponent
+    FooterComponent,
+    SpinnerComponent
   ],
   templateUrl: './sorteo.component.html',
   styleUrl: './sorteo.component.scss'
@@ -35,17 +39,48 @@ export class SorteoComponent {
   showConditions = false;
   condicionesMostradas = false;
 
+  // Añade estas dos variables al inicio de tu componente
+  showSuccessAlert = false;
+  showErrorAlert = false;
+  errorMessage = '';
+
+  loading = false;
+
   pdfSrc: string = '/assets/documents/bases-sorteo.pdf';
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private censoService: CensoService
   ) {}
 
   registrar() {
-    this.registroForm.controls['dni'].setValue(this.registroForm.controls['dni'].value.toUpperCase());
-    this.registroForm.controls['telefono'].setValue(this.registroForm.controls['telefono'].value.replace(/\s+/g, '').trim());
+    this.loading = true;
+    let sorteo: Sorteo = {};
+    this.censoService.sorteosPost(this.rellenaDatos(sorteo)).subscribe({
+      next: data => {
+        console.log('Sorteo registrado -> ', data);
+        this.loading = false;
+        this.showSuccessAlert = true; // Muestra la alerta de éxito
+        setTimeout(() => this.showSuccessAlert = false, 5000); // Oculta la alerta de éxito después de 5 segundos
+      },
+      error: error => {
+        console.error('Error al registrar sorteo -> ', error);
+        this.loading = false;
+        this.showErrorAlert = true;
+        this.errorMessage = error.message; // Guarda el mensaje de error
+        setTimeout(() => this.showErrorAlert = false, 10000); // Oculta la alerta de éxito después de 5 segundos
+      }
+    });
     console.log('Registrado -> ', this.registroForm.value);
     this.reset();
+  }
+
+  rellenaDatos(sorteo: Sorteo) {
+    sorteo.dni = this.registroForm.controls['dni'].value.toUpperCase();
+    sorteo.telefono = this.registroForm.controls['telefono'].value.replace(/\s+/g, '').trim();
+    sorteo.email = this.registroForm.controls['email'].value;
+    sorteo.instagram = this.registroForm.controls['instagram'].value;
+    return sorteo;
   }
 
   reset() {
@@ -56,6 +91,8 @@ export class SorteoComponent {
     this.emailTouched = false;
     this.telefonoTouched = false;
     this.instagramTouched = false;
+    this.showSuccessAlert = false; // Oculta la alerta de éxito
+    this.showErrorAlert = false; // Oculta la alerta de error
   }
 
   limpiar() {
