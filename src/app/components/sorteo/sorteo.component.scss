@@ -1,4 +1,9 @@
 @import '../../../variables.scss';
+.position-up-right {
+    position: absolute;
+    top: 0;
+    right: 4px;
+}
 
 .pdf-visor {
     position: fixed;
