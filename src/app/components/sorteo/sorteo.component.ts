@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-sorteo',
@@ -8,7 +9,8 @@ import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModu
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    NgxExtendedPdfViewerModule
   ],
   templateUrl: './sorteo.component.html',
   styleUrl: './sorteo.component.scss'
@@ -28,7 +30,10 @@ export class SorteoComponent {
   instagramTouched = false;
 
   condicionesAceptadas = false;
+  showConditions = false;
   condicionesMostradas = false;
+
+  pdfSrc: string = '/assets/documents/bases-sorteo.pdf';
 
   constructor(
     private fb: FormBuilder
@@ -64,9 +69,14 @@ export class SorteoComponent {
   showCondiciones() {
     console.log('Condiciones aceptadas -> ', this.condicionesAceptadas);
     this.condicionesMostradas = true;
+    this.showConditions = true;
   }
 
-  aceptoCondiciones() {
+  hideCondiciones() { 
+    this.showConditions = false;
+  }
+
+  aceptarCondiciones() {
     this.condicionesAceptadas = !this.condicionesAceptadas;
     this.registroForm.controls['aceptoCondiciones'].setValue(this.condicionesAceptadas);
   }

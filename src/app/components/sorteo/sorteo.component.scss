@@ -1,1 +1,26 @@
 @import '../../../variables.scss';
+
+.pdf-visor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.pdf-visor ngx-extended-pdf-viewer {
+    width: 98%;  /* Adjust as needed */
+    height: auto; /* Adjust as needed */
+}
+
+.pdf-visor .btn-foc-rojo {
+    margin-top: 2rem;
+}

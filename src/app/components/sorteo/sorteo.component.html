@@ -117,7 +117,7 @@
                 <div class="condiciones d-flex flex-column my-3" [formGroup]="registroForm">
                     <!-- ... -->
                     <div class="form-group form-check">
-                      <input type="checkbox" class="form-check-input" id="aceptoCondiciones" formControlName="aceptoCondiciones" (click)="aceptoCondiciones()">
+                      <input type="checkbox" class="form-check-input" id="aceptoCondiciones" formControlName="aceptoCondiciones" (click)="aceptarCondiciones()">
                       <label class="form-check-label" for="aceptoCondiciones">Acepto las condiciones del sorteo</label>
                     </div>
                     <!-- ... -->
@@ -127,6 +127,17 @@
             <button class="btn btn-foc-salmon" (click)="showCondiciones()">
                 Ver condiciones
             </button>
+
+            @if (showConditions) {
+                <div class="pdf-visor">
+                    <ngx-extended-pdf-viewer 
+                        [src]="pdfSrc" 
+                        useBrowserLocale="true" 
+                        height="80vh"
+                    ></ngx-extended-pdf-viewer>
+                    <button class="btn btn-danger btn-foc-rojo" (click)="hideCondiciones()">Cerrar</button>
+                </div>
+            }
 
         </div>
 
