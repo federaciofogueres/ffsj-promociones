@@ -5,5 +5,5 @@ import { SorteosComponent } from './components/sorteos/sorteos.component';
 export const routes: Routes = [
     { path: 'sorteos', component: SorteosComponent },
     { path: 'sorteos/:id', component: SorteoComponent },
-    { path: '**', redirectTo: 'sorteos'},
+    { path: '**', redirectTo: 'sorteos/1'},
 ];

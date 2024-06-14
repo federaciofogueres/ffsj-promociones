@@ -61,7 +61,7 @@
               <div class="form-group mb-3">
                 <label for="descripcion">Teléfono</label>
                 <input type="text" id="telefono" class="form-control" formControlName="telefono" (blur)="telefonoTouched = true" required [ngClass]="{'is-invalid': registroForm.controls['telefono'].errors && telefonoTouched}">
-                @if (registroForm.controls['telefono'].errors && dniTouched) {
+                @if (registroForm.controls['telefono'].errors && telefonoTouched) {
                     @if (registroForm.controls['telefono'].errors['required']) {
                         <div>
                             <span class="invalid-field">

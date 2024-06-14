@@ -1,6 +1,31 @@
+@import '../../../variables.scss';
+
+@media (min-width: 768px) {
+    .footer {
+        bottom: 3rem;
+    }
+    .container {
+        position: relative;
+        bottom: 3.5rem;
+        height: unset !important;
+    }
+    
+}
 .footer {
     position: fixed;
     left: 0;
-    bottom: 10px;
+    bottom: 0.63rem;
     width: 100%;
+    height: 75px;
+}
+
+.container {
+    height: 75px; /* Ajusta esto a la altura que desees para el contenedor */
+    overflow: hidden; /* Esto es para evitar que las imágenes se desborden del contenedor */
+}
+
+.container img {
+    height: 75px; /* Esto hace que las imágenes se ajusten a la altura del contenedor */
+    width: auto; /* Esto mantiene la relación de aspecto de las imágenes */
+    object-fit: contain;
 }

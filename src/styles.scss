@@ -4,3 +4,13 @@
 @import 'bootstrap/scss/bootstrap';
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 // @import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
+
+$display-font-sizes: (
+  1: 5rem,
+  2: 4.5rem,
+  3: 4rem,
+  4: 3.5rem,
+  5: 3rem,
+  6: 2.5rem,
+  7: 1rem
+);

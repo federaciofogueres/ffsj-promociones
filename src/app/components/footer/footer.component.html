@@ -1,22 +1,52 @@
 <div class="footer">    
-    <span class="h5 container-fluid ps-5">
-        Patrocinan
-    </span>
-    <div class="d-flex px-3 row justify-content-center">
-        <div class="patrocinador col-2">
-            <img src="../../../assets/img/sponsors/sp1.jpg" class="img-fluid" alt="Patrocinador 1">
+    @if (width > 768) {
+        <div class="container">            
+            <span class="h5 container-fluid ps-5 text-rojo">
+                Patrocinan
+            </span>
+            <div class="d-flex px-3 row justify-content-center">
+                <div class="patrocinador col-2">
+                    <img src="../../../assets/img/sponsors/sp1.jpg" class="img-fluid" alt="Patrocinador 1">
+                </div>
+                <div class="patrocinador col-2">
+                    <img src="../../../assets/img/sponsors/sp2.png" class="img-fluid" alt="Patrocinador 2">
+                </div>
+                <div class="patrocinador col-2">
+                    <img src="../../../assets/img/sponsors/sp3.png" class="img-fluid" alt="Patrocinador 3">
+                </div>
+                <div class="patrocinador col-2">
+                    <img src="../../../assets/img/sponsors/sp4.png" class="img-fluid" alt="Patrocinador 4">
+                </div>
+                <div class="patrocinador col-2">
+                    <img src="../../../assets/img/sponsors/sp5.jpg" class="img-fluid" alt="Patrocinador 5">
+                </div>
+            </div>  
         </div>
-        <div class="patrocinador col-2">
-            <img src="../../../assets/img/sponsors/sp2.png" class="img-fluid" alt="Patrocinador 2">
+    } @else {
+        <div class="container">
+            <div class="d-flex">
+                <span class="h5 text-rojo ms-3">
+                    Patrocinan
+                </span>
+                <ngb-carousel [interval]="3000" [showNavigationArrows]="false" [showNavigationIndicators]="false" class="text-center d-flex justify-content-center w-100">
+                    <ng-template ngbSlide>
+                    <img src="../../../assets/img/sponsors/sp1.jpg" class="img-fluid" alt="Patrocinador 1">
+                    </ng-template>
+                    <ng-template ngbSlide>
+                    <img src="../../../assets/img/sponsors/sp2.png" class="img-fluid" alt="Patrocinador 2">
+                    </ng-template>
+                    <ng-template ngbSlide>
+                    <img src="../../../assets/img/sponsors/sp3.png" class="img-fluid" alt="Patrocinador 3">
+                    </ng-template>
+                    <ng-template ngbSlide>
+                    <img src="../../../assets/img/sponsors/sp4.png" class="img-fluid" alt="Patrocinador 4">
+                    </ng-template>
+                    <ng-template ngbSlide>
+                    <img src="../../../assets/img/sponsors/sp5.jpg" class="img-fluid" alt="Patrocinador 5">
+                    </ng-template>
+                </ngb-carousel>
+            </div>
         </div>
-        <div class="patrocinador col-2">
-            <img src="../../../assets/img/sponsors/sp3.png" class="img-fluid" alt="Patrocinador 3">
-        </div>
-        <div class="patrocinador col-2">
-            <img src="../../../assets/img/sponsors/sp4.png" class="img-fluid" alt="Patrocinador 4">
-        </div>
-        <div class="patrocinador col-2">
-            <img src="../../../assets/img/sponsors/sp5.jpg" class="img-fluid" alt="Patrocinador 5">
-        </div>
-    </div>  
+    }
+
 </div>

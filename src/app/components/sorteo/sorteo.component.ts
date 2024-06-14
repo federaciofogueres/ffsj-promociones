@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-sorteo',
@@ -10,7 +11,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    NgxExtendedPdfViewerModule
+    NgxExtendedPdfViewerModule,
+    FooterComponent
   ],
   templateUrl: './sorteo.component.html',
   styleUrl: './sorteo.component.scss'
@@ -43,6 +45,17 @@ export class SorteoComponent {
     this.registroForm.controls['dni'].setValue(this.registroForm.controls['dni'].value.toUpperCase());
     this.registroForm.controls['telefono'].setValue(this.registroForm.controls['telefono'].value.replace(/\s+/g, '').trim());
     console.log('Registrado -> ', this.registroForm.value);
+    this.reset();
+  }
+
+  reset() {
+    this.condicionesAceptadas = false;
+    this.showConditions = false;
+    this.registroForm.reset();
+    this.dniTouched = false;
+    this.emailTouched = false;
+    this.telefonoTouched = false;
+    this.instagramTouched = false;
   }
 
   limpiar() {
