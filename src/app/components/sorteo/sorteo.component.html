@@ -1,1 +1,138 @@
-<p>sorteo works!</p>
+<div class="container-fluid px-5">
+
+    <div class="d-flex flex-column">
+
+        <span class="h3">
+            Inscripción al sorteo
+        </span>
+
+        <span class="h5">
+            "Entradas mascletà 19 de junio de 2024 en Luceros"
+        </span>
+
+    </div>
+
+    @if(condicionesAceptadas) {
+        <div class="formulario">
+            <form [formGroup]="registroForm">
+                
+              <div class="form-group mb-3">
+                <label for="lema">DNI/NIF</label>
+                <input type="text" id="lema" class="form-control" formControlName="dni" (blur)="dniTouched = true" required [ngClass]="{'is-invalid': registroForm.controls['dni'].errors && dniTouched}">
+                @if (registroForm.controls['dni'].errors && dniTouched) {
+                    @if (registroForm.controls['dni'].errors['required']) {
+                        <div>
+                            <span class="invalid-field">
+                                DNI/NIF es requerido.
+                            </span>
+                        </div>
+                    }
+                    @if (registroForm.controls['dni'].errors['invalidDni']) {
+                        <div>
+                            <span class="invalid-field">
+                                El formato del DNI/NIF es incorrecto.
+                            </span>
+                        </div>
+                    }
+                }
+              </div>
+          
+              <div class="form-group mb-3">
+                <label for="descripcion">e-mail</label>
+                <input type="email" id="email" class="form-control" formControlName="email" (blur)="emailTouched = true" required [ngClass]="{'is-invalid': registroForm.controls['email'].errors && emailTouched}">
+                @if (registroForm.controls['email'].errors && emailTouched) {
+                    @if (registroForm.controls['email'].errors['required']) {
+                        <div>
+                            <span class="invalid-field">
+                                El e-mail es requerido.
+                            </span>
+                        </div>
+                    }
+                    @if (registroForm.controls['email'].errors['email']) {
+                        <div>
+                            <span class="invalid-field">
+                                El formato del e-mail es incorrecto.
+                            </span>
+                        </div>
+                    }
+                }
+              </div>
+          
+              <div class="form-group mb-3">
+                <label for="descripcion">Teléfono</label>
+                <input type="text" id="telefono" class="form-control" formControlName="telefono" (blur)="telefonoTouched = true" required [ngClass]="{'is-invalid': registroForm.controls['telefono'].errors && telefonoTouched}">
+                @if (registroForm.controls['telefono'].errors && dniTouched) {
+                    @if (registroForm.controls['telefono'].errors['required']) {
+                        <div>
+                            <span class="invalid-field">
+                                El teléfono es requerido.
+                            </span>
+                        </div>
+                    }
+                }
+              </div>
+
+              <div class="form-group mb-3">
+                <label for="descripcion">Usuario de instagram</label>
+                <input type="text" id="instagram" class="form-control" formControlName="instagram" (blur)="instagramTouched = true" required [ngClass]="{'is-invalid': registroForm.controls['instagram'].errors && instagramTouched}">
+                @if (registroForm.controls['instagram'].errors && instagramTouched) {
+                    @if (registroForm.controls['instagram'].errors['required']) {
+                        <div>
+                            <span class="invalid-field">
+                                El usuario de instagram es requerido. Si no tienes, escribe "No tengo".
+                            </span>
+                        </div>
+                    }
+                }
+              </div>
+            
+            </form>
+        
+            <div class="d-flex flex-column flex-md-row justify-content-md-between my-3">
+              <button type="submit" class="btn btn-primary btn-foc-naranja px-4 my-2 my-lg-0" [disabled]="!registroForm.valid" (click)="registrar()">Participar</button>
+              <button class="btn btn-danger btn-foc-rojo px-4 my-2 my-lg-0" (click)="limpiar()">Borrar</button>
+            </div>
+        </div>
+    } @else {
+
+        <div class="condiciones d-flex flex-column">
+            
+            <span class="text my-2">
+                Bienvenido a la inscripción al sorteo de las entradas para la mascletà del 19 de junio de 2024 en Luceros. 
+            </span>
+
+            <span class="text my-2">
+                Antes de poder inscribirte, queremos que leas y aceptes las condiciones del sorteo.
+            </span>
+
+            <span class="text my-2">
+                Por favor, lee bien las condiciones y, si estás de acuerdo, marca la casilla de aceptación.
+            </span>
+
+            <span class="h6 text my-2">
+                <strong>*RECUERDA</strong> que la pulsera será intransferible y será necesario presentar tu DNI para acceder al recinto.
+            </span>
+
+            @if(condicionesMostradas) {
+                <div class="condiciones d-flex flex-column my-3" [formGroup]="registroForm">
+                    <!-- ... -->
+                    <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="aceptoCondiciones" formControlName="aceptoCondiciones" (click)="aceptoCondiciones()">
+                      <label class="form-check-label" for="aceptoCondiciones">Acepto las condiciones del sorteo</label>
+                    </div>
+                    <!-- ... -->
+                </div>
+            }
+
+            <button class="btn btn-foc-salmon" (click)="showCondiciones()">
+                Ver condiciones
+            </button>
+
+        </div>
+
+    }
+
+</div>
+
+
+<!-- <button (click)="logForm()">log</button> -->
