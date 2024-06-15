@@ -64,10 +64,10 @@ export class SorteoComponent {
         setTimeout(() => this.showSuccessAlert = false, 5000); // Oculta la alerta de éxito después de 5 segundos
       },
       error: error => {
-        console.error('Error al registrar sorteo -> ', error);
+        console.error('Error al registrar sorteo -> ', error.error?.status?.message);
         this.loading = false;
         this.showErrorAlert = true;
-        this.errorMessage = error.message; // Guarda el mensaje de error
+        this.errorMessage = error.error?.status?.message; // Guarda el mensaje de error
         setTimeout(() => this.showErrorAlert = false, 10000); // Oculta la alerta de éxito después de 5 segundos
       }
     });
