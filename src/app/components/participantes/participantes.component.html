@@ -1,0 +1,9 @@
+<ul class="list-group">
+    @for (participante of participantes; track $index) {
+        <li class="d-flex justify-content-between my-2 border border-danger rounded border-foc-rojo p-2" (click)="open(participante)">
+            <span>
+                {{participante.nombre}} {{participante.apellidos}} - Entrada: {{participante.entrada}}
+            </span>
+        </li>
+    }
+</ul>

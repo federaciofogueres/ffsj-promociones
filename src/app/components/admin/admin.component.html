@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="header d-flex justify-content-between mb-3">
+        <span class="h1 text-rojo">
+            Administración
+        </span>
+        <button class="btn btn-success btn-foc-rojo px-5">
+            <span>Sortear!</span>
+        </button>
+    </div>
+    <hr class="border-foc-naranja">
+    <div class="d-flex flex-column align-items-center g-3">
+        @if(showList === 'participantes') {
+            <div class="w-100 d-flex justify-content-between align-items-center">
+                <span class="h2 text-naranja">Participantes</span>
+                <button class="btn btn-primary btn-foc-naranja mb-3 px-3" (click)="showList = 'ganadores'">Ver Ganadores</button>
+            </div>
+            <app-participantes [participantes]="participantes"></app-participantes>
+        } @else if (showList === 'ganadores') {
+            <div class="w-100 d-flex justify-content-between align-items-center">
+                <span class="h2 text-naranja">Ganadores</span>
+                <button class="btn btn-primary btn-foc-naranja mb-3 px-3" (click)="showList = 'participantes'">Ver Participantes</button>
+            </div>
+            <app-participantes [participantes]="ganadores"></app-participantes>
+        }
+    </div>
+</div>

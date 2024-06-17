@@ -62,8 +62,9 @@ export class AuthService {
   }
 
   logout() {
-    this.cookieService.delete('token');
+    this.cookieService.delete('token', '/');
     this.router.navigateByUrl('login');
+    window.location.reload();
   }
 
   isLoggedIn(): boolean {
