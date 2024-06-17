@@ -1,4 +1,4 @@
-@if (loading) {
+<!-- @if (loading) {
     <app-spinner [fullscreen]="true"></app-spinner>
 } @else {
     <div class="container-fluid px-5">
@@ -118,12 +118,10 @@
     
                 @if(condicionesMostradas) {
                     <div class="condiciones d-flex flex-column my-3" [formGroup]="registroForm">
-                        <!-- ... -->
                         <div class="form-group form-check">
                           <input type="checkbox" class="form-check-input" id="aceptoCondiciones" formControlName="aceptoCondiciones" (click)="aceptarCondiciones()">
                           <label class="form-check-label" for="aceptoCondiciones">Acepto las condiciones del sorteo</label>
                         </div>
-                        <!-- ... -->
                     </div>
                 }
     
@@ -158,6 +156,22 @@
         </span>
         <i class="bi bi-x-circle-fill position-up-right" (click)="showErrorAlert = false"></i>
     </div>
-}
+} -->
 
 <!-- <button (click)="logForm()">log</button> -->
+
+<div class="condiciones d-flex flex-column text-center">
+                
+    <span class="h1 my-2">
+        ¡Sorteo cerrado!
+    </span>
+
+    <span class="text my-2">
+        GRACIAS por vuestra participación.
+    </span>
+
+    <span class="text my-2">
+        Para cualquier duda o consulta, contacta con 'transformaciondigital"&#64;"hogueras.es'.
+    </span>
+
+</div>
