@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Participante } from '../../models/participante.model';
+import { Sorteo } from '../../../external-api/sorteo';
 import { ParticipanteCardComponent } from '../participante-card/participante-card.component';
 
 @Component({
@@ -14,14 +14,14 @@ import { ParticipanteCardComponent } from '../participante-card/participante-car
 export class ParticipantesComponent {
 
   @Input()
-  participantes: Participante[] = [];
+  participantes: Sorteo[] = [];
 
   constructor(
     protected router: Router,
     private modalService: NgbModal
   ) {}
 
-  open(participante: Participante) {
+  open(participante: Sorteo) {
     const modalRef = this.modalService.open(ParticipanteCardComponent);
     modalRef.componentInstance.participante = participante;
   }

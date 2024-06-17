@@ -1,0 +1,36 @@
+@if (loading) {
+    <app-spinner></app-spinner>
+} @else {
+
+    <div class="container">
+        <div class="formulario">
+            <form [formGroup]="registroForm">
+                <div class="form-group mb-3">
+                    <label for="lema" class="text-naranja">DNI/NIF</label>
+                    <input type="text" id="lema" class="form-control" formControlName="dni" (blur)="dniTouched = true" required [ngClass]="{'is-invalid': registroForm.controls['dni'].errors && dniTouched}">
+                    @if (registroForm.controls['dni'].errors && dniTouched) {
+                        @if (registroForm.controls['dni'].errors['required']) {
+                            <div>
+                                <span class="invalid-field">
+                                    DNI/NIF es requerido.
+                                </span>
+                            </div>
+                        }
+                        @if (registroForm.controls['dni'].errors['invalidDni']) {
+                            <div>
+                                <span class="invalid-field">
+                                    El formato del DNI/NIF es incorrecto.
+                                </span>
+                            </div>
+                        }
+                    }
+                </div>
+            </form>
+            <div class="d-flex flex-column flex-md-row justify-content-md-between my-3">
+              <button type="submit" class="btn btn-primary btn-foc-naranja px-4 my-2 my-lg-0" [disabled]="!registroForm.valid" (click)="procesarAccion(1)">Confirma tu entrada</button>
+              <button type="submit" class="btn btn-primary btn-foc-rojo px-4 my-2 my-lg-0" [disabled]="!registroForm.valid" (click)="procesarAccion(3)">Rechaza tu entrada</button>
+            </div>
+        </div>
+    </div>
+
+}

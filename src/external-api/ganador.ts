@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-export interface Sorteo { 
+export interface Ganador { 
     /**
      * Email del participante
      */
@@ -27,8 +27,4 @@ export interface Sorteo {
      * Nombre de instagram
      */
     instagram?: string;
-    /**
-     * Número de participación
-     */
-    participacion?: number;
 }

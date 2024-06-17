@@ -10,25 +10,18 @@
  * Do not edit the class manually.
  */
 
-export interface Sorteo { 
+export interface Email { 
+    [key: string]: any;
     /**
-     * Email del participante
+     * Para que correo electrónico se tiene que enviar el correo
      */
-    email?: string;
+    para: string;
     /**
-     * DNI/NIF del participante
+     * Asunto del correo electrónico
      */
-    dni?: string;
+    asunto: string;
     /**
-     * Teléfono del participante
+     * Cuerpo del correo electrónico
      */
-    telefono?: string;
-    /**
-     * Nombre de instagram
-     */
-    instagram?: string;
-    /**
-     * Número de participación
-     */
-    participacion?: number;
+    cuerpo: string;
 }

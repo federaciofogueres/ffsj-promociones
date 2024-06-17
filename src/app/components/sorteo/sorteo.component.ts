@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { Sorteo } from '../../../external-api/sorteo';
 import { CensoService } from '../../services/censo.service';
+import { ValidatorsService } from '../../services/validators.service';
 import { FooterComponent } from '../footer/footer.component';
 import { SpinnerComponent } from '../spinner/spinner.component';
 
@@ -23,7 +24,7 @@ import { SpinnerComponent } from '../spinner/spinner.component';
 })
 export class SorteoComponent {
   registroForm: FormGroup = this.fb.group({
-    dni: ['', [Validators.required, this.dniValidator]],
+    dni: ['', [Validators.required, this.validatorsService.dniValidator]],
     email: ['', [Validators.required, Validators.email]],
     telefono: ['', Validators.required],
     instagram: ['', Validators.required],
@@ -50,7 +51,8 @@ export class SorteoComponent {
 
   constructor(
     private fb: FormBuilder,
-    private censoService: CensoService
+    private censoService: CensoService,
+    private validatorsService: ValidatorsService
   ) {}
 
   registrar() {
@@ -97,19 +99,6 @@ export class SorteoComponent {
 
   limpiar() {
     this.registroForm.reset();
-  }
-  
-  dniValidator(control: AbstractControl): { [key: string]: any } | null {
-    const dni = control.value;
-    const re = /^[0-9]{8}[A-Za-z]$/;
-    if (!re.test(dni)) {
-      return { 'invalidDni': true };
-    }
-    const letters = 'TRWAGMYFPDXBNJZSQVHLCKE';
-    const numbers = dni.slice(0, 8);
-    const expectedLetter = letters[numbers % 23];
-    const letter = dni.slice(8);
-    return expectedLetter === letter.toUpperCase() ? null : { 'invalidDni': true };
   }
 
   logForm() {

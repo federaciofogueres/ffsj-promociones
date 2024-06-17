@@ -1,9 +1,9 @@
-<ul class="list-group">
+<div class="row d-flex justify-content-around no-gutters">
     @for (participante of participantes; track $index) {
-        <li class="d-flex justify-content-between my-2 border border-danger rounded border-foc-rojo p-2" (click)="open(participante)">
-            <span>
-                {{participante.nombre}} {{participante.apellidos}} - Entrada: {{participante.entrada}}
+        <div class="col-5 my-2 border border-danger rounded border-foc-rojo p-2" (click)="open(participante)">
+            <span class="text-center">
+                Entrada: {{participante.participacion}}
             </span>
-        </li>
+        </div>
     }
-</ul>
+</div>

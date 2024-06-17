@@ -1,0 +1,47 @@
+@if (loading) {
+    <app-spinner></app-spinner>
+} @else {
+
+    <div class="container">
+        <div class="formulario">
+            <form [formGroup]="registroForm">
+                <div class="form-group mb-3">
+                    <label for="lema" class="text-naranja">DNI/NIF</label>
+                    <input type="text" id="lema" class="form-control" formControlName="dni" (blur)="dniTouched = true" required [ngClass]="{'is-invalid': registroForm.controls['dni'].errors && dniTouched}">
+                    @if (registroForm.controls['dni'].errors && dniTouched) {
+                        @if (registroForm.controls['dni'].errors['required']) {
+                            <div>
+                                <span class="invalid-field">
+                                    DNI/NIF es requerido.
+                                </span>
+                            </div>
+                        }
+                        @if (registroForm.controls['dni'].errors['invalidDni']) {
+                            <div>
+                                <span class="invalid-field">
+                                    El formato del DNI/NIF es incorrecto.
+                                </span>
+                            </div>
+                        }
+                    }
+                </div>
+            </form>
+            <div class="d-flex flex-column flex-md-row justify-content-md-between my-3">
+              <button type="submit" class="btn btn-primary btn-foc-naranja px-4 my-2 my-lg-0" [disabled]="!registroForm.valid" (click)="comprobar()">Comprueba si has ganado</button>
+            </div>
+        </div>
+        @if (ganador && showMessage) {
+            <div class="ganador d-flex flex-column text-naranja">
+                <span class="h1 text-center">¡Enhorabuena!</span>
+                <span>Has sido uno de los 100 ganadores del sorteo.</span>
+                <span>Revisa tu email para confirmar o rechazar tu entrada</span>
+            </div>
+        } @else if (!ganador && showMessage) {
+            <div class="ganador d-flex flex-column text-rojo">
+                <span class="h1 text-center">Lo sentimos :(</span>
+                <span>Esta vez no ha habido suerte. La próxima vez será!</span>
+            </div>
+        }
+    </div>
+
+}
